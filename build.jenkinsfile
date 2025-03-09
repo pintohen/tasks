@@ -15,8 +15,9 @@ pipeline {
         stage('Send Artifact to Nexus') {
             steps {
                 script {
-                    def nexusCredentials = credentials('nexus-credentials')
-                    sh "mvn deploy -DskipTests -Dusername=${nexusCredentials.username} -Dpassword=${nexusCredentials.password}"
+                    withCredentials([usernamePassword(credentialsId: 'nexus-credentials', usernameVariable: 'NEXUS_USERNAME', passwordVariable: 'NEXUS_PASSWORD')]) {
+                        sh "mvn deploy -DskipTests -Dusername=${NEXUS_USERNAME} -Dpassword=${NEXUS_PASSWORD}"
+                    }
                 }
             }
         }
