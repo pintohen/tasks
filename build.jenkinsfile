@@ -1,0 +1,9 @@
+pipeline {
+    stages {
+        stage ('Initial Build') {
+            steps {
+                echo 'First Pipeline'
+            }
+        }
+    }
+}
