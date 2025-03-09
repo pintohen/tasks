@@ -12,5 +12,12 @@ pipeline {
                 sh 'mvn clean package'
             }
         }
+        stage('Send Artifact to Nexus') {
+            steps {
+                script {
+                    sh "mvn deploy -DskipTests"
+                }
+            }
+        }
     }
 }
