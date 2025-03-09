@@ -6,6 +6,11 @@ pipeline {
         jdk 'OpenJDK 21'
     }
 
+     environment {
+        NEXUS_USERNAME = credentials('nexus-credentials').username
+        NEXUS_PASSWORD = credentials('nexus-credentials').password
+     }
+
     stages {
         stage ('Build Project') {
             steps {
@@ -15,7 +20,7 @@ pipeline {
         stage('Send Artifact to Nexus') {
             steps {
                 script {
-                    sh "mvn deploy -DskipTests"
+                    sh "mvn deploy -DskipTests -Dusername=${NEXUS_USERNAME} -Dpassword=${NEXUS_PASSWORD}"
                 }
             }
         }
