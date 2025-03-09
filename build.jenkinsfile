@@ -1,10 +1,15 @@
 pipeline {
     agent any
 
+    tools {
+        maven 'Maven-3.9.6'
+        jdk 'OpenJDK-23'
+    }
+
     stages {
-        stage ('Initial Build') {
+        stage ('Build Project') {
             steps {
-                echo 'First Pipeline'
+                sh 'mvn clean package'
             }
         }
     }
