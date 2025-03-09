@@ -36,7 +36,7 @@ public class TaskServiceImpl implements TaskService {
 
         try {
             idValue = Long.parseLong(id);
-        } catch (NumberFormatException _) {
+        } catch (NumberFormatException nfe) {
             throw new TaskActionException("""
                     Task Id must be a numeric value.
                     Please try again with a proper value.
